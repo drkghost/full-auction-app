@@ -1,8 +1,11 @@
-﻿@model IEnumerable<Auctions.Models.Listing>
+﻿@model PaginatedList<Auctions.Models.Listing>
 
 @{
     ViewData["Title"] = "Index";
 }
+
+@* login: test1@test.com
+pass: P@ssword2 *@
 
 <h1>Active listings</h1>
 
@@ -17,7 +20,7 @@
             <div class="col col-xs-6 col-lg-7">
                 <h5><a asp-action="Details" asp-route-id="@listing.Id" style="color: black;">@listing.Title</a></h5>
                 <div>@listing.Description</div>
-                <div>Bid: @listing.Price.ToString("N2")</div>
+                <div>Bid: $ @listing.Price.ToString("N2")</div>
                 <div>Listed by: @listing.User.Email</div>
             </div>
         </div>
@@ -27,3 +30,21 @@
 {
     <p>No active listings</p>
 }
+
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div class="d-flex justify-content-center">
+    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <div class="btn" style="cursor: default">
+        Page @Model.PageIndex of @Model.TotalPages
+    </div>
+    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled">
+        Next
+    </a>
+</div>
