@@ -55,6 +55,18 @@ namespace Auctions.Controllers
                 pageSize));
         }
 
+        public async Task<IActionResult> MyBids(int? pageNumber)
+        {
+            var applicationDbContext = _bidsService.GetAll();
+            var pageSize = 3;
+
+            return View("MyBids",
+                await PaginatedList<Bid>.CreateAsync(applicationDbContext
+                    .Where(x => x.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(),
+                pageNumber ?? 1,
+                pageSize));
+        }
+
         //// GET: Listings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
