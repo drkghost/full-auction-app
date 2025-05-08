@@ -95,7 +95,7 @@
     <div class="container">
         <form asp-action="AddComment" method="post">
             <h6>Add comment</h6>
-            <textarea class="forn-control" aria-label="with textarea" name="Content" style="width: 50%; vertical-align: top;"></textarea>
+            <textarea class="form-control" aria-label="with textarea" name="Content" style="width: 50%; vertical-align: top;"></textarea>
             <input type="hidden" name="IdentityUserId" class="form-control" value="@userManager.GetUserId(User)" />
             <input type="hidden" name="ListingId" class="form-control" value="@Model.Id" />
             <input type="submit" class="btn btn-primary" style="display: inline-block; margin-top: 10px;" />
@@ -106,7 +106,7 @@ else
 {
     <div class="container">
         <h6>Add comment</h6>
-        <textarea class="forn-control" aria-label="with textarea" name="Content" style="width: 50%; vertical-align: top;"></textarea>
+        <textarea class="form-control" aria-label="with textarea" name="Content" style="width: 50%; vertical-align: top;"></textarea>
         <input type="submit" disabled class="btn btn-primary" style="display: inline-block; margin-top: 10px;" />
     </div>
 }
@@ -118,7 +118,7 @@ else
     @foreach (var comment in Model.Comments)
     {
         <div style="border: 1px solid lightgray; margin: 10px; padding: 10px; border-radius: 10px; width: 40%;">
-            <p>@comment.Content - @comment.User.UserName</p>
+            <p>@comment?.Content - @comment?.User?.Email</p>
         </div>
     }
 </div>
